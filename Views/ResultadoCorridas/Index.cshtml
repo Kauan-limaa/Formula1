@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Formula1.Models.ResultadoCorrida>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Piloto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Temporada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Pista)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posicao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PontosGanhos)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Piloto.Nome_piloto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temporada.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pista.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Posicao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PontosGanhos)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

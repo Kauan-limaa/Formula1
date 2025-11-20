@@ -1,0 +1,80 @@
+﻿
+body {
+    background: white;
+    min-height: 100vh;
+}
+h1, h4 {
+    color: #c00000;
+    font-weight: bold;
+}
+
+
+.btn-primary {
+    background-color: #d40000;
+    border-color: #d40000;
+}
+
+    .btn-primary:hover {
+        background-color: #b30000;
+        border-color: #b30000;
+    }
+
+
+#navbar-f1 {
+    background-color: #8B0000; 
+    padding: 12px;
+}
+
+    #navbar-f1 .nav-link {
+        color: white !important;
+        font-weight: 500;
+    }
+
+    #navbar-f1 .navbar-brand {
+        color: white !important;
+        font-size: 1.4rem;
+    }
+
+   
+    #navbar-f1 .nav-link:hover {
+        color: #ffcccc !important;
+        transition: 0.2s;
+    }
+
+a.btn,
+input[type="submit"],
+button,
+a[href*="Create"],
+a[href*="Edit"],
+a[href*="Delete"],
+a[href*="Details"],
+a[href*="Create"].btn,
+a[href*="Edit"].btn,
+a[href*="Delete"].btn,
+a[href*="Details"].btn {
+    background-color: #C40000 !important; 
+    color: white !important;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none !important;
+    border: none;
+    transition: background-color 0.2s, transform 0.15s;
+}
+
+   
+    a.btn:hover,
+    input[type="submit"]:hover,
+    button:hover,
+    a[href*="Create"]:hover,
+    a[href*="Edit"]:hover,
+    a[href*="Delete"]:hover,
+    a[href*="Details"]:hover {
+        background-color: #8F0000 !important; 
+        transform: scale(1.03);
+    }
+
+a:focus {
+    outline: none !important;
+}
+

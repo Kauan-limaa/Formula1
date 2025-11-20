@@ -1,0 +1,48 @@
+﻿@model Formula1.Models.ResultadoCorrida
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>ResultadoCorrida</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Piloto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Piloto.Nome_piloto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Temporada)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Temporada.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Pista)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Pista.Nome)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Posicao)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Posicao)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PontosGanhos)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PontosGanhos)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

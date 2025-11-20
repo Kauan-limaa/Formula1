@@ -3,6 +3,7 @@ using Formula1.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Formula1.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20251118000510_MakePontosGanhosNullable")]
+    partial class MakePontosGanhosNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,7 +134,7 @@ namespace Formula1.Migrations
                     b.Property<int>("PistaId")
                         .HasColumnType("int");
 
-                    b.Property<int>("PontosGanhos")
+                    b.Property<int?>("PontosGanhos")
                         .HasColumnType("int");
 
                     b.Property<int>("Posicao")
