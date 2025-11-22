@@ -12,6 +12,8 @@ namespace Formula1.Models
         public DbSet<Temporada>Temporas { get; set; }
         public DbSet<ResultadoCorrida> ResultadoCorridas { get; set; }
 
+        public DbSet<PontuacaoEquipeTemporada> PontuacaoEquipeTemporada { get; set; }
+
         public DbSet<PontuacaoPilotoTemporada> PontuacaoPilotoTemporada { get; set; }
 
     }

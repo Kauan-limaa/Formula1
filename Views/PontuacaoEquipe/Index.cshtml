@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Formula1.Models.ResultadoCorrida>
+﻿@model IEnumerable<Formula1.Models.PontuacaoEquipeTemporada>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,22 +13,13 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Piloto)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Equipe)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Temporada)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Pista)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Posicao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PontosGanhos)
+                @Html.DisplayNameFor(model => model.Pontos)
             </th>
             <th></th>
         </tr>
@@ -37,22 +28,13 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Piloto.Nome_piloto)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Equipe.Nome_equipe)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Temporada.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Pista.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Posicao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PontosGanhos)
+                @Html.DisplayFor(modelItem => item.Pontos)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

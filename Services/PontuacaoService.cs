@@ -29,34 +29,72 @@ public class PontuacaoService
     }
 
     public async Task RegistrarResultadoCorridaAsync(
-    int pilotoId,
-    int temporadaId,
-    int pistaId,
-    int posicao)
+        int pilotoId,
+        int equipeId,
+        int temporadaId,
+        int pistaId,
+        int posicao)
     {
         int pontosGanhos = PontosPorPosicao(posicao);
 
-        // Buscar ou criar temporada
-        var registroTemporada = await _context.PontuacaoPilotoTemporada
+        var registroPiloto = await _context.PontuacaoPilotoTemporada
             .FirstOrDefaultAsync(x => x.PilotoId == pilotoId && x.TemporadaId == temporadaId);
 
-        if (registroTemporada == null)
+        if (registroPiloto == null)
         {
-            registroTemporada = new PontuacaoPilotoTemporada
-            {
-                PilotoId = pilotoId,
-                TemporadaId = temporadaId,
-                Pontos = 0
-            };
+            registroPiloto = new PontuacaoPilotoTemporada { PilotoId = pilotoId, TemporadaId = temporadaId, Pontos = 0 };
+            _context.PontuacaoPilotoTemporada.Add(registroPiloto);
+        }
+        registroPiloto.Pontos += pontosGanhos;
 
-            _context.PontuacaoPilotoTemporada.Add(registroTemporada);
+
+        var registroEquipe = await _context.PontuacaoEquipeTemporada 
+            .FirstOrDefaultAsync(x => x.EquipeId == equipeId && x.TemporadaId == temporadaId);
+
+        if (registroEquipe == null)
+        {
+            registroEquipe = new PontuacaoEquipeTemporada { EquipeId = equipeId, TemporadaId = temporadaId, Pontos = 0 };
+            _context.PontuacaoEquipeTemporada.Add(registroEquipe);
+        }
+        registroEquipe.Pontos += pontosGanhos; 
+
+        
+    }
+
+ 
+    public async Task RemoverResultadoCorridaAsync(int pilotoId, int equipeId, int temporadaId)
+    {
+ 
+        var resultadosRestantesPiloto = await _context.ResultadoCorridas
+            .Where(r => r.PilotoId == pilotoId && r.TemporadaId == temporadaId)
+            .ToListAsync();
+
+        int novaPontuacaoPiloto = resultadosRestantesPiloto.Sum(r => PontosPorPosicao(r.Posicao));
+
+        var registroPiloto = await _context.PontuacaoPilotoTemporada
+            .FirstOrDefaultAsync(x => x.PilotoId == pilotoId && x.TemporadaId == temporadaId);
+
+        if (registroPiloto != null)
+        {
+            registroPiloto.Pontos = novaPontuacaoPiloto;
+            _context.Update(registroPiloto);
         }
 
-        // Apenas soma os pontos
-        registroTemporada.Pontos += pontosGanhos;
+  
+        var resultadosRestantesEquipe = await _context.ResultadoCorridas
+            .Where(r => r.EquipeId == equipeId && r.TemporadaId == temporadaId)
+            .ToListAsync();
 
-        // ❌ Removido: NÃO cria resultado da corrida aqui!
+        int novaPontuacaoEquipe = resultadosRestantesEquipe.Sum(r => PontosPorPosicao(r.Posicao));
 
-        await _context.SaveChangesAsync();
+        var registroEquipe = await _context.PontuacaoEquipeTemporada
+            .FirstOrDefaultAsync(x => x.EquipeId == equipeId && x.TemporadaId == temporadaId);
+
+        if (registroEquipe != null)
+        {
+            registroEquipe.Pontos = novaPontuacaoEquipe;
+            _context.Update(registroEquipe);
+        }
+
     }
 }

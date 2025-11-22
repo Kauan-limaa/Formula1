@@ -3,6 +3,7 @@ using Formula1.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Formula1.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20251121231246_equipeNoResultado")]
+    partial class equipeNoResultado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,32 +92,6 @@ namespace Formula1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Pistas");
-                });
-
-            modelBuilder.Entity("Formula1.Models.PontuacaoEquipeTemporada", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EquipeId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Pontos")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TemporadaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EquipeId");
-
-                    b.HasIndex("TemporadaId");
-
-                    b.ToTable("PontuacaoEquipeTemporada");
                 });
 
             modelBuilder.Entity("Formula1.Models.PontuacaoPilotoTemporada", b =>
@@ -199,25 +176,6 @@ namespace Formula1.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Temporas");
-                });
-
-            modelBuilder.Entity("Formula1.Models.PontuacaoEquipeTemporada", b =>
-                {
-                    b.HasOne("Formula1.Models.Equipe", "Equipe")
-                        .WithMany()
-                        .HasForeignKey("EquipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Formula1.Models.Temporada", "Temporada")
-                        .WithMany()
-                        .HasForeignKey("TemporadaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Equipe");
-
-                    b.Navigation("Temporada");
                 });
 
             modelBuilder.Entity("Formula1.Models.PontuacaoPilotoTemporada", b =>

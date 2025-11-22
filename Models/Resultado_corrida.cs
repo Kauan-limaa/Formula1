@@ -15,6 +15,10 @@ namespace Formula1.Models
         public int PilotoId { get; set; }
         public Piloto Piloto { get; set; }
 
+        [Required(ErrorMessage = "A equipe é obrigatório.")]
+        [Display(Name = "Equipe")]
+        public int EquipeId { get; set; }
+        public Equipe Equipe { get; set; }
 
         [Required(ErrorMessage = "A temporada é obrigatória.")]
         [Display(Name = "Temporada")]
