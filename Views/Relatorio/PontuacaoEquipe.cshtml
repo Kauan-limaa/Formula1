@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Formula1.ViewModels.PontuacaoEquipeViewModel>
+
+<h2>Pontuação por Equipe</h2>
+
+<form method="get">
+    <select name="temporadaId" asp-items="ViewBag.Temporadas" class="form-control"></select>
+    <button type="submit" class="btn btn-primary mt-2">Filtrar</button>
+</form>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Equipe</th>
+            <th>Pontos</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @{
+            int posicao = 1;
+            int totalPontos = 0;
+        }
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@posicao</td>
+                <td>@item.NomeEquipe</td>
+                <td>@item.TotalPontos</td>
+            </tr>
+
+            posicao++;
+            totalPontos += item.TotalPontos;
+        }
+
+        <!-- Total -->
+        <tr>
+            <td></td>
+            <td>Total</td>
+            <td>@totalPontos</td>
+        </tr>
+    </tbody>
+</table>
